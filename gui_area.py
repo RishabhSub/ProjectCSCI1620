@@ -38,6 +38,11 @@ class GUI:
         self.shape_button_frame.pack(anchor='n')
         self.shape_button.pack(side='left', padx=10, pady=10)
 
+        self.shape_confirm_frame = Frame(self.window)
+        self.shape_confirm_label = Label(self.shape_confirm_frame, text='')
+        self.shape_confirm_label.pack(padx=10)
+        self.shape_confirm_frame.pack(anchor='n')
+
         self.side_frame = Frame(self.window)
         self.side_label = Label(self.side_frame, text='Enter side length/radius length')
         self.side_entry_a = Entry(self.side_frame)
@@ -66,8 +71,8 @@ class GUI:
             :return: Does not return anything, but saves clicked radio button as selection
             """
             shape = self.shape_radio_label
-            self.shape_radio_label = Label(self.shape_frame, text=value)
-            self.shape_radio_label.pack()
+            self.shape_confirm_label.config(text=value)
+            self.shape_confirm_label.pack()
 
     def calculate(self) -> None:
         """
@@ -107,7 +112,10 @@ class GUI:
                 self.area_label.pack(padx=10)
                 t = turtle.Turtle()
                 colors = ['red', 'blue', 'green', 'yellow', 'orange']
-                t.color(random.choice(colors))
+                color_choice = random.choice(colors)
+                t.fillcolor(color_choice)
+                t.begin_fill()
+                t.color(color_choice)
                 t.pensize(10)
                 t.shape('turtle')
                 t.pendown()
@@ -119,6 +127,7 @@ class GUI:
                 t.left(90)
                 t.forward((side1 * 10))
                 t.left(90)
+                t.end_fill()
                 t.penup()
             elif shape == 'Rectangle':
                 area = round(area_rectangle(side1, side2))
@@ -126,7 +135,10 @@ class GUI:
                 self.area_label.pack(padx=10)
                 t = turtle.Turtle()
                 colors = ['red', 'blue', 'green', 'yellow', 'orange']
-                t.color(random.choice(colors))
+                color_choice = random.choice(colors)
+                t.fillcolor(color_choice)
+                t.begin_fill()
+                t.color(color_choice)
                 t.pensize(10)
                 t.shape('turtle')
                 t.forward(side1 * 10)
@@ -137,6 +149,7 @@ class GUI:
                 t.left(90)
                 t.forward(side2 * 10)
                 t.left(90)
+                t.end_fill()
             elif shape == 'Triangle':
                 area = round(area_triangle(side1, side2))
                 side_length = sqrt((((4 * area) / side1) ** 2 + side1 ** 2) / 4)
@@ -149,7 +162,10 @@ class GUI:
                 self.area_label.pack(padx=10)
                 t = turtle.Turtle()
                 colors = ['red', 'blue', 'green', 'yellow', 'orange']
-                t.color(random.choice(colors))
+                color_choice = random.choice(colors)
+                t.fillcolor(color_choice)
+                t.begin_fill()
+                t.color(color_choice)
                 t.pensize(10)
                 t.shape('turtle')
                 t.forward(side2 * 10)
@@ -158,16 +174,21 @@ class GUI:
                 t.left(angle_beta)
                 t.forward(side_length * 10)
                 t.left(180 - angle_alpha)
+                t.end_fill()
             elif shape == 'Circle':
                 area = round(area_circle(side1), 2)
                 self.area_label.config(text=area)
                 self.area_label.pack(padx=10)
                 t = turtle.Turtle()
                 colors = ['red', 'blue', 'green', 'yellow', 'orange']
-                t.color(random.choice(colors))
+                color_choice = random.choice(colors)
+                t.fillcolor(color_choice)
+                t.begin_fill()
+                t.color(color_choice)
                 t.pensize(10)
                 t.shape('turtle')
                 t.circle(side1 * 10)
+                t.end_fill()
 
         self.side_entry_a.delete(0, END)
         self.side_entry_b.delete(0, END)
